@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morada Suites Hotel — Campana, Buenos Aires</title>
+<meta name="description" content="Morada Suites Hotel. Confort y ubicación privilegiada en el centro de Campana, Buenos Aires. 26 habitaciones singles, dobles y triples." />
+
+<!-- ===== Fonts (Playfair Display + Lato) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<!-- ===== Font Awesome ===== -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+/* ============================================================
+   MORADA SUITES — Brand font (Big Caslon, hotel's own typeface)
+   ============================================================ */
+@font-face{
+  font-family:"Big Caslon";
+  src:url("assets/BigCaslon.ttf") format("truetype");
+  font-weight:400 700;
+  font-style:normal;
+  font-display:swap;
+}
+
+/* ============================================================
+   MORADA SUITES — Design Tokens
+   ============================================================ */
+:root{
+  --navy-deep:   #0D2B6B;   /* azul marino profundo */
+  --navy-mid:    #1A4A9F;   /* azul medio */
+  --cobalt:      #1E5BC6;   /* azul cobalto */
+  --white:       #FFFFFF;
+  --gold:        #C9A84C;   /* dorado para detalles */
+  --gold-soft:   #DCC079;
+  --ink:         #16223B;   /* texto principal sobre claro */
+  --slate:       #5A6478;   /* texto secundario */
+  --paper:       #F6F7FA;   /* fondo claro alterno */
+  --line:        rgba(13,43,107,0.12);
+
+  --grad-blue:   linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 48%, var(--cobalt) 100%);
+  --grad-radial: radial-gradient(120% 130% at 18% 12%, var(--cobalt) 0%, var(--navy-mid) 42%, var(--navy-deep) 100%);
+
+  --serif: "Playfair Display", Georgia, serif;
+  --brand: "Big Caslon", "Playfair Display", Georgia, serif;
+  --sans:  "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --shadow-card: 0 18px 48px -18px rgba(13,43,107,0.45);
+  --shadow-soft: 0 14px 40px -22px rgba(13,43,107,0.55);
+
+  --nav-h: 84px;
+  --maxw: 1240px;
+}
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-weight:400;
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3,h4{ font-family:var(--serif); font-weight:600; line-height:1.12; margin:0; color:var(--ink); }
+p{ margin:0; }
+button{ font-family:inherit; cursor:pointer; }
+
+/* utility: section shells */
+.wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+.eyebrow{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.3em;
+  color:var(--gold);
+  margin:0 0 18px;
+  display:inline-block;
+}
+.eyebrow.on-dark{ color:var(--gold-soft); }
+.section{ padding:120px 0; position:relative; }
+.section-head{ max-width:620px; }
+.section-head.center{ margin:0 auto; text-align:center; }
+.section-head h2{ font-size:clamp(2.1rem,4.4vw,3.2rem); letter-spacing:-.01em; }
+.section-head p{ margin-top:18px; color:var(--slate); font-size:1.06rem; }
+.section-head.on-dark h2{ color:#fff; }
+.section-head.on-dark p{ color:rgba(255,255,255,.78); }
+
+/* gold rule used under eyebrows / dividers */
+.rule{ width:54px; height:2px; background:var(--gold); border:0; margin:22px 0 0; }
+.center .rule{ margin-left:auto; margin-right:auto; }
+
+/* ============================================================
+   Reveal-on-scroll
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(38px); transition:opacity .9s cubic-bezier(.16,.7,.2,1), transform .9s cubic-bezier(.16,.7,.2,1); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal.d1{ transition-delay:.08s; }
+.reveal.d2{ transition-delay:.16s; }
+.reveal.d3{ transition-delay:.24s; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1 !important; transform:none !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ============================================================
+   Navbar
+   ============================================================ */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  height:var(--nav-h);
+  display:flex; align-items:center;
+  transition:background .45s ease, box-shadow .45s ease, height .45s ease, border-color .45s ease;
+  border-bottom:1px solid transparent;
+}
+.nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.nav.solid{
+  background:rgba(10,30,76,0.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  height:70px;
+  box-shadow:0 10px 30px -16px rgba(0,0,0,.6);
+  border-bottom-color:rgba(255,255,255,.08);
+}
+.nav-links{ display:flex; align-items:center; gap:38px; list-style:none; margin:0; padding:0; }
+.nav-links a{
+  color:rgba(255,255,255,.86);
+  font-size:.82rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em;
+  position:relative; padding:6px 0;
+  transition:color .25s ease;
+}
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:-2px; height:2px; width:0;
+  background:var(--gold); transition:width .3s ease;
+}
+.nav-links a:hover{ color:#fff; }
+.nav-links a:hover::after{ width:100%; }
+.nav-links .mob-cta{ display:none; }   /* only shown inside the mobile drawer */
+.nav-cta{
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--gold); color:var(--navy-deep);
+  font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.14em;
+  padding:12px 22px; border-radius:2px;
+  transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.nav-cta:hover{ background:var(--gold-soft); transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(201,168,76,.8); }
+.nav-toggle{ display:none; background:none; border:0; color:#fff; font-size:1.5rem; }
+
+/* mobile drawer */
+@media (max-width:980px){
+  .nav-toggle{ display:block; }
+  .nav-cta.desktop{ display:none; }
+  .nav-links{
+    position:fixed; inset:0 0 0 auto; width:min(82vw,340px);
+    flex-direction:column; align-items:flex-start; justify-content:center;
+    gap:8px; padding:90px 34px 40px;
+    background:var(--grad-blue);
+    transform:translateX(100%); transition:transform .4s cubic-bezier(.16,.7,.2,1);
+    box-shadow:-30px 0 60px -30px rgba(0,0,0,.7);
+  }
+  .nav-links.open{ transform:none; }
+  .nav-links a{ font-size:1rem; padding:14px 0; width:100%; border-bottom:1px solid rgba(255,255,255,.1); letter-spacing:.18em; }
+  .nav-links a::after{ display:none; }
+  .nav-links .mob-cta{ display:block; margin-top:18px; }
+  .nav-links .mob-cta a{ border:0; }
+}
+
+/* ============================================================
+   Logo (inline SVG monogram)
+   ============================================================ */
+.logo{ display:flex; align-items:center; gap:14px; }
+.logo svg{ display:block; }
+.logo .lockup{ display:flex; flex-direction:column; line-height:1; }
+.logo{ flex-shrink:0; }
+.logo-mark{ width:54px; height:54px; object-fit:contain; display:block; }
+.logo .lockup .word{ font-family:var(--brand); font-weight:400; color:#fff; font-size:1.34rem; letter-spacing:.02em; white-space:nowrap; }
+.logo .lockup .sub{ font-family:var(--sans); font-weight:700; color:var(--gold); font-size:.56rem; letter-spacing:.42em; margin-top:5px; }
+@media (max-width:560px){ .logo .lockup .word{ font-size:1.1rem; } }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  position:relative; min-height:100vh;
+  display:flex; align-items:center;
+  color:#fff; overflow:hidden;
+  padding:var(--nav-h) 0 200px;
+}
+.hero-bg{
+  position:absolute; inset:-8% 0 -8% 0; z-index:0;
+  background-size:cover; background-position:center;
+  background-color:var(--navy-deep);
+  will-change:transform;
+}
+.hero-video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center;
+}
+.hero-bg::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(100deg, rgba(8,22,58,.64) 0%, rgba(8,22,58,.38) 44%, rgba(13,43,107,.20) 100%),
+    linear-gradient(180deg, rgba(8,22,58,0) 52%, rgba(8,22,58,.58) 100%);
+}
+.hero .wrap{ position:relative; z-index:2; }
+.hero-inner{ max-width:760px; }
+.hero h1{
+  font-family:var(--brand);
+  color:#fff; font-size:clamp(2.9rem,6.8vw,5.6rem);
+  font-weight:400; letter-spacing:.005em; line-height:1.04; text-wrap:balance;
+  text-shadow:0 2px 30px rgba(6,16,42,.45);
+}
+.hero .lead{
+  margin-top:24px; font-size:clamp(1.05rem,2.1vw,1.4rem);
+  font-weight:300; color:rgba(255,255,255,.9); max-width:560px;
+  text-shadow:0 1px 18px rgba(6,16,42,.4);
+}
+.hero-cta{
+  margin-top:40px; display:inline-flex; align-items:center; gap:12px;
+  background:var(--gold); color:var(--navy-deep);
+  font-weight:700; text-transform:uppercase; letter-spacing:.16em; font-size:.85rem;
+  padding:18px 38px; border-radius:2px;
+  transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+}
+.hero-cta:hover{ background:#fff; transform:translateY(-3px); box-shadow:0 20px 40px -18px rgba(0,0,0,.55); }
+.hero-cta i{ transition:transform .3s ease; }
+.hero-cta:hover i{ transform:translateX(5px); }
+
+.scroll-hint{
+  position:absolute; left:50%; bottom:230px; transform:translateX(-50%);
+  z-index:2; color:rgba(255,255,255,.6); font-size:.66rem;
+  text-transform:uppercase; letter-spacing:.3em; text-align:center;
+}
+.scroll-hint .dash{ display:block; width:1px; height:46px; margin:14px auto 0; background:linear-gradient(rgba(255,255,255,.6),transparent); animation:scrolly 2.2s ease-in-out infinite; transform-origin:top; }
+@keyframes scrolly{ 0%,100%{ transform:scaleY(.4); opacity:.4; } 50%{ transform:scaleY(1); opacity:1; } }
+@media (max-width:980px){ .scroll-hint{ display:none; } }
+
+/* ============================================================
+   Booking widget (overlaps hero)
+   ============================================================ */
+.booking{ position:relative; z-index:30; margin-top:-130px; }
+.booking-card{
+  background:#fff; border-radius:6px;
+  box-shadow:var(--shadow-card);
+  padding:30px 30px 32px;
+  border-top:3px solid var(--gold);
+}
+.booking-card h3{ font-size:1.35rem; }
+.booking-card .bk-sub{ color:var(--slate); font-size:.92rem; margin-top:6px; margin-bottom:24px; }
+.bk-grid{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(3,1fr);
+}
+.bk-grid.row2{ grid-template-columns:repeat(2,1fr) auto; align-items:end; margin-top:16px; }
+.field{ display:flex; flex-direction:column; gap:7px; }
+.field label{
+  font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em;
+  color:var(--navy-mid);
+}
+.field input, .field select, .field textarea{
+  font-family:var(--sans); font-size:.95rem; color:var(--ink);
+  padding:13px 14px; border:1px solid var(--line); border-radius:3px;
+  background:var(--paper); transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  width:100%;
+}
+.field textarea{ resize:vertical; min-height:54px; }
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none; border-color:var(--cobalt); background:#fff;
+  box-shadow:0 0 0 3px rgba(30,91,198,.12);
+}
+.bk-submit{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  background:var(--grad-blue); color:#fff; border:0;
+  font-weight:700; text-transform:uppercase; letter-spacing:.13em; font-size:.82rem;
+  padding:14px 30px; border-radius:3px; height:48px; white-space:nowrap;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+.bk-submit:hover{ transform:translateY(-2px); filter:brightness(1.08); box-shadow:0 16px 32px -14px rgba(30,91,198,.7); }
+@media (max-width:760px){
+  .booking{ margin-top:-90px; }
+  .bk-grid, .bk-grid.row2{ grid-template-columns:1fr; }
+}
+
+/* ============================================================
+   About (split)
+   ============================================================ */
+.about-grid{
+  display:grid; grid-template-columns:1.05fr 1fr; gap:70px; align-items:center;
+}
+.about-copy .lead-quote{ font-family:var(--serif); font-style:italic; font-size:1.5rem; color:var(--navy-mid); margin:0 0 22px; line-height:1.35; }
+.about-copy p.body{ color:var(--slate); font-size:1.06rem; }
+.about-stats{ display:flex; gap:42px; margin-top:38px; }
+.about-stats .stat .n{ font-family:var(--serif); font-size:2.6rem; color:var(--navy-deep); line-height:1; }
+.about-stats .stat .l{ font-size:.74rem; text-transform:uppercase; letter-spacing:.16em; color:var(--slate); margin-top:8px; }
+.about-media{ position:relative; }
+.about-media img{ width:100%; height:560px; object-fit:cover; border-radius:6px; box-shadow:var(--shadow-soft); }
+.about-media .badge{
+  position:absolute; left:-26px; bottom:42px;
+  background:var(--grad-blue); color:#fff;
+  padding:24px 30px; border-radius:6px; box-shadow:var(--shadow-card);
+  max-width:230px;
+}
+.about-media .badge .b-n{ font-family:var(--serif); font-size:1.8rem; }
+.about-media .badge .b-l{ font-size:.74rem; text-transform:uppercase; letter-spacing:.14em; color:var(--gold-soft); margin-top:4px; }
+@media (max-width:900px){
+  .about-grid{ grid-template-columns:1fr; gap:44px; }
+  .about-media img{ height:420px; }
+  .about-media .badge{ left:20px; }
+}
+
+/* ============================================================
+   Rooms
+   ============================================================ */
+.rooms-section{ background:var(--paper); }
+.rooms-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:60px; }
+.room-card{
+  position:relative; background:#fff; border-radius:6px; overflow:hidden;
+  box-shadow:0 10px 34px -22px rgba(13,43,107,.5);
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.room-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-card); }
+.room-media{ position:relative; overflow:hidden; height:280px; }
+.room-media img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.room-card:hover .room-media img{ transform:scale(1.08); }
+.room-media .tag{
+  position:absolute; top:16px; left:16px; z-index:2;
+  background:rgba(13,43,107,.85); color:#fff;
+  font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.16em;
+  padding:7px 13px; border-radius:2px; backdrop-filter:blur(4px);
+}
+.room-body{ padding:26px 26px 30px; }
+.room-body h3{ font-size:1.55rem; }
+.room-body .cap{ display:flex; align-items:center; gap:8px; color:var(--gold); font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em; margin-top:6px; }
+.room-body p{ color:var(--slate); margin-top:14px; font-size:.98rem; }
+.room-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
+.room-foot .meta{ display:flex; gap:16px; color:var(--slate); font-size:.86rem; }
+.room-foot .meta i{ color:var(--navy-mid); margin-right:5px; }
+.room-link{ color:var(--navy-mid); font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; display:inline-flex; align-items:center; gap:7px; transition:gap .25s ease, color .25s ease; }
+.room-link:hover{ gap:12px; color:var(--cobalt); }
+@media (max-width:900px){ .rooms-grid{ grid-template-columns:1fr; max-width:440px; margin-left:auto; margin-right:auto; } }
+
+/* ============================================================
+   Services
+   ============================================================ */
+.services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:60px; }
+.svc{
+  display:flex; align-items:flex-start; gap:16px;
+  padding:24px 22px; border-radius:5px; background:var(--paper);
+  border:1px solid transparent;
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
+}
+.svc:hover{ transform:translateY(-4px); background:#fff; border-color:var(--line); box-shadow:var(--shadow-soft); }
+.svc-ico{
+  flex:0 0 46px; width:46px; height:46px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(30,91,198,.08); color:var(--navy-mid);
+}
+.svc-ico svg{ width:22px; height:22px; }
+.svc:hover .svc-ico{ background:var(--grad-blue); color:#fff; }
+.svc-ico, .svc-ico svg{ transition:background .3s ease, color .3s ease; }
+.svc .t{ font-family:var(--serif); font-size:1.04rem; color:var(--ink); font-weight:600; }
+.svc .d{ font-size:.86rem; color:var(--slate); margin-top:3px; line-height:1.5; }
+@media (max-width:900px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:580px){ .services-grid{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   Gallery (masonry + lightbox)
+   ============================================================ */
+.gallery-section{ background:var(--paper); }
+.masonry{ margin-top:60px; column-count:3; column-gap:18px; }
+.masonry figure{
+  margin:0 0 18px; break-inside:avoid; position:relative; overflow:hidden; border-radius:5px;
+  cursor:pointer; box-shadow:0 10px 30px -22px rgba(13,43,107,.55);
+}
+.masonry img{ width:100%; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.masonry figure::after{
+  content:"\f00e"; font-family:"Font Awesome 6 Free"; font-weight:900;
+  position:absolute; inset:0; display:grid; place-items:center;
+  color:#fff; font-size:1.4rem;
+  background:linear-gradient(0deg, rgba(13,43,107,.55), rgba(13,43,107,.2));
+  opacity:0; transition:opacity .35s ease;
+}
+.masonry figure:hover img{ transform:scale(1.07); }
+.masonry figure:hover::after{ opacity:1; }
+@media (max-width:900px){ .masonry{ column-count:2; } }
+@media (max-width:560px){ .masonry{ column-count:1; } }
+
+/* lightbox */
+.lightbox{
+  position:fixed; inset:0; z-index:100; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(6,16,42,.93); backdrop-filter:blur(6px);
+  padding:40px;
+}
+.lightbox.open{ display:flex; animation:lbfade .3s ease; }
+@keyframes lbfade{ from{ opacity:0; } to{ opacity:1; } }
+.lightbox img{ max-width:90vw; max-height:84vh; border-radius:5px; box-shadow:0 30px 80px -20px rgba(0,0,0,.8); }
+.lb-btn{
+  position:absolute; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25);
+  color:#fff; width:54px; height:54px; border-radius:50%; font-size:1.2rem;
+  display:grid; place-items:center; transition:background .25s ease, transform .25s ease;
+}
+.lb-btn:hover{ background:var(--gold); color:var(--navy-deep); transform:scale(1.06); }
+.lb-close{ top:28px; right:28px; }
+.lb-prev{ left:28px; top:50%; transform:translateY(-50%); }
+.lb-next{ right:28px; top:50%; transform:translateY(-50%); }
+.lb-prev:hover, .lb-next:hover{ transform:translateY(-50%) scale(1.06); }
+@media (max-width:600px){ .lb-prev{ left:14px; } .lb-next{ right:14px; } .lb-btn{ width:46px; height:46px; } }
+
+/* ============================================================
+   CTA banner (parallax)
+   ============================================================ */
+.cta-banner{
+  position:relative; overflow:hidden;
+  color:#fff; text-align:center;
+  padding:130px 0;
+}
+.cta-bg{
+  position:absolute; inset:-12% 0 -12% 0; z-index:0;
+  background-size:cover; background-position:center; will-change:transform;
+}
+.cta-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(13,43,107,.92), rgba(30,91,198,.82)); }
+.cta-banner .wrap{ position:relative; z-index:2; }
+.cta-banner h2{ color:#fff; font-size:clamp(2rem,4.4vw,3.1rem); max-width:760px; margin:0 auto; text-wrap:balance; }
+.cta-banner .btn-ghost{
+  margin-top:36px; display:inline-flex; align-items:center; gap:12px;
+  background:var(--gold); color:var(--navy-deep);
+  font-weight:700; text-transform:uppercase; letter-spacing:.16em; font-size:.85rem;
+  padding:18px 40px; border-radius:2px;
+  transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
+}
+.cta-banner .btn-ghost:hover{ background:#fff; transform:translateY(-3px); box-shadow:0 20px 40px -18px rgba(0,0,0,.5); }
+
+/* ============================================================
+   Platforms
+   ============================================================ */
+.platforms{ text-align:center; }
+.plat-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:22px; margin-top:56px; }
+.plat{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  width:230px; padding:38px 24px; border-radius:6px;
+  background:#fff; border:1px solid var(--line);
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.plat:hover{ transform:translateY(-5px); box-shadow:var(--shadow-card); border-color:transparent; }
+.plat .pl-name{ font-family:var(--serif); font-size:1.45rem; color:var(--navy-deep); }
+.plat .pl-name b{ color:var(--cobalt); }
+.plat .pl-tag{ font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; color:var(--slate); }
+.plat .pl-mark{ width:54px; height:54px; border-radius:12px; display:grid; place-items:center; color:#fff; font-size:1.5rem; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer{ background:var(--grad-radial); color:#fff; padding-top:90px; }
+.footer-grid{ display:grid; grid-template-columns:1.1fr 1fr 1.4fr; gap:54px; padding-bottom:70px; }
+.footer .logo .lockup .word{ font-size:1.46rem; }
+.footer .logo-mark{ width:50px; height:50px; }
+.footer-col h4{ color:#fff; font-size:1.05rem; margin-bottom:22px; letter-spacing:.01em; }
+.footer-col .ftxt{ color:rgba(255,255,255,.74); font-size:.95rem; }
+.footer-about p{ color:rgba(255,255,255,.74); font-size:.96rem; margin-top:22px; max-width:330px; }
+.contact-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
+.contact-list li{ display:flex; gap:14px; align-items:flex-start; color:rgba(255,255,255,.82); font-size:.95rem; }
+.contact-list li i{ color:var(--gold); width:18px; text-align:center; margin-top:4px; }
+.contact-list a:hover{ color:var(--gold-soft); }
+.map-embed{ border-radius:6px; overflow:hidden; box-shadow:0 20px 50px -24px rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.12); }
+.map-embed iframe{ display:block; width:100%; height:260px; border:0; filter:grayscale(.2) contrast(1.05); }
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.12); padding:26px 0;
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px;
+  color:rgba(255,255,255,.6); font-size:.82rem;
+}
+.footer-bottom .socials{ display:flex; gap:12px; }
+.footer-bottom .socials a{ width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.08); transition:background .25s ease, transform .25s ease; }
+.footer-bottom .socials a:hover{ background:var(--gold); color:var(--navy-deep); transform:translateY(-3px); }
+@media (max-width:900px){ .footer-grid{ grid-template-columns:1fr; gap:40px; } }
+
+/* back to top */
+.to-top{
+  position:fixed; right:24px; bottom:24px; z-index:55;
+  width:48px; height:48px; border-radius:50%; border:0;
+  background:var(--grad-blue); color:#fff; font-size:1rem;
+  box-shadow:0 14px 30px -14px rgba(13,43,107,.8);
+  opacity:0; pointer-events:none; transform:translateY(14px);
+  transition:opacity .3s ease, transform .3s ease, filter .25s ease;
+}
+.to-top.show{ opacity:1; pointer-events:auto; transform:none; }
+.to-top:hover{ filter:brightness(1.12); }
+
+/* ============================================================
+   PRINT — paginate the continuous page into clean PDF pages
+   ============================================================ */
+@media print{
+  *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  @page{ size:A4 portrait; margin:0; }
+  html{ scroll-behavior:auto; }
+  body{ overflow:visible; }
+
+  /* hide interactive chrome that makes no sense on paper */
+  .nav, .to-top, .scroll-hint, .lightbox, .nav-toggle{ display:none !important; }
+
+  /* reveal everything (no scroll animations on paper) */
+  .reveal{ opacity:1 !important; transform:none !important; }
+
+  /* hero: drop the video, keep the photo background */
+  .hero-video{ display:none !important; }
+  .hero{ min-height:auto !important; padding:120px 0 90px !important; break-after:page; }
+  .hero-bg{ position:absolute !important; inset:0 !important; transform:none !important; }
+
+  /* keep the booking widget on its own from the hero */
+  .booking{ margin-top:40px !important; break-inside:avoid; }
+  .booking-card{ box-shadow:none !important; border:1px solid var(--line) !important; }
+
+  /* tame full-viewport sections + heavy spacing for paper */
+  .section{ padding:60px 0 !important; break-inside:avoid; }
+  .cta-banner{ padding:80px 0 !important; break-inside:avoid; }
+  .cta-bg{ position:absolute !important; inset:0 !important; transform:none !important; }
+
+  /* logical page breaks between major blocks */
+  #habitaciones, #servicios, .gallery-section, .platforms, .footer{ break-before:page; }
+
+  /* avoid splitting cards / figures across pages */
+  .room-card, .svc, .plat, .masonry figure, .about-grid{ break-inside:avoid; }
+
+  /* masonry → simple 2-col grid that paginates predictably */
+  .masonry{ column-count:2 !important; }
+
+  /* never clip rounded media on paper */
+  .room-media, .about-media img, .masonry figure{ overflow:visible; }
+
+  /* map iframe usually renders blank in PDF — show address instead */
+  .map-embed{ display:none !important; }
+
+  a{ text-decoration:none !important; color:inherit !important; }
+}
+</style>
+<style id="__om-edit-overrides"></style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#inicio" class="logo" aria-label="Morada Suites Hotel">
+      <img class="logo-mark" src="assets/ms-logo.png" alt="Morada Suites Hotel" />
+      <span class="lockup">
+        <span class="word">Morada Suites</span>
+        <span class="sub">— HOTEL —</span>
+      </span>
+    </a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#habitaciones">Habitaciones</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="mob-cta"><a href="#reservas" class="nav-cta">Reservar</a></li>
+      </ul>
+    </nav>
+
+    <a href="#reservas" class="nav-cta desktop"><i class="fa-regular fa-calendar-check"></i> Reservar</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" id="heroBg" data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-14-Enero-2020.jpg" style="background-image:url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1700&q=80')">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/hero-morada.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="eyebrow on-dark reveal">Campana · Buenos Aires</span>
+      <h1 class="reveal d1">Morada Suites Hotel</h1>
+      <p class="lead reveal d2">Confort y ubicación privilegiada en el centro de Campana.</p>
+      <a href="#reservas" class="hero-cta reveal d3">Reservar <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div class="scroll-hint">Descubrir<span class="dash"></span></div>
+</section>
+
+<!-- ============================================================
+     BOOKING WIDGET
+     ============================================================ -->
+<div class="booking" id="reservas">
+  <div class="wrap">
+    <form class="booking-card reveal" action="mailto:reservas@moradasuites.com.ar" method="post" enctype="text/plain">
+      <h3>Consultá tu estadía</h3>
+      <p class="bk-sub">Completá tus datos y te respondemos a la brevedad.</p>
+
+      <div class="bk-grid">
+        <div class="field">
+          <label for="bk-name">Nombre</label>
+          <input id="bk-name" name="Nombre" type="text" placeholder="Tu nombre" required />
+        </div>
+        <div class="field">
+          <label for="bk-email">Email</label>
+          <input id="bk-email" name="Email" type="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="field">
+          <label for="bk-phone">Teléfono</label>
+          <input id="bk-phone" name="Telefono" type="tel" placeholder="(011) 0000-0000" />
+        </div>
+      </div>
+
+      <div class="bk-grid" style="margin-top:16px;">
+        <div class="field">
+          <label for="bk-in">Check-in</label>
+          <input id="bk-in" name="CheckIn" type="date" required />
+        </div>
+        <div class="field">
+          <label for="bk-out">Check-out</label>
+          <input id="bk-out" name="CheckOut" type="date" required />
+        </div>
+        <div class="field">
+          <label for="bk-people">Personas</label>
+          <select id="bk-people" name="Personas">
+            <option>1 persona</option>
+            <option>2 personas</option>
+            <option>3 personas</option>
+            <option>4 o más</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bk-grid row2">
+        <div class="field" style="grid-column:1 / 3;">
+          <label for="bk-msg">Comentarios</label>
+          <textarea id="bk-msg" name="Comentarios" placeholder="Contanos si necesitás algo en particular"></textarea>
+        </div>
+        <button class="bk-submit" type="submit"><i class="fa-regular fa-paper-plane"></i> Consultar disponibilidad</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 style="font-size:clamp(2rem,4vw,2.9rem);">Una excelente elección para descansar</h2>
+        <hr class="rule" />
+        <p class="body" style="margin-top:26px;">Morada Suites está ubicado en el centro de Campana, a pasos de la plaza principal, restaurantes y los principales puntos de interés de la ciudad. Contamos con 26 habitaciones singles, dobles y triples, amplias, luminosas y equipadas para garantizar el descanso de nuestros huéspedes.</p>
+        <div class="about-stats">
+          <div class="stat"><div class="n">26</div><div class="l">Habitaciones</div></div>
+          <div class="stat"><div class="n">3</div><div class="l">Tipologías</div></div>
+          <div class="stat"><div class="n">73<span style="font-size:1.2rem;">km</span></div><div class="l">De Buenos Aires</div></div>
+        </div>
+      </div>
+      <div class="about-media reveal d2">
+        <img data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-3-Enero-2020.jpg" src="https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1100&q=80" alt="Interior de Morada Suites Hotel" loading="lazy" />
+        <div class="badge">
+          <div class="b-n">Centro</div>
+          <div class="b-l">A pasos de la plaza principal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ROOMS
+     ============================================================ -->
+<section class="section rooms-section" id="habitaciones">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Alojamiento</span>
+      <h2>Habitaciones</h2>
+      <hr class="rule" />
+      <p>26 habitaciones confortables. Singles, dobles y triples.</p>
+    </div>
+
+    <div class="rooms-grid">
+      <!-- Single -->
+      <article class="room-card reveal">
+        <div class="room-media">
+          <span class="tag">Single</span>
+          <img data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-19-Enero-2020.jpg" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=900&q=80" alt="Habitación single" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3>Habitación Single</h3>
+          <div class="cap"><i class="fa-solid fa-user"></i> Para 1 persona</div>
+          <p>Para una persona. Amplia, luminosa y completamente equipada.</p>
+          <div class="room-foot">
+            <div class="meta"><span><i class="fa-solid fa-wifi"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake"></i>A/C</span></div>
+            <a href="#reservas" class="room-link">Reservar <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Doble -->
+      <article class="room-card reveal d1">
+        <div class="room-media">
+          <span class="tag">Doble</span>
+          <img data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-15-Enero-2020.jpg" src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80" alt="Habitación doble" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3>Habitación Doble</h3>
+          <div class="cap"><i class="fa-solid fa-user-group"></i> Para 2 personas</div>
+          <p>Para dos personas. Cómoda y funcional.</p>
+          <div class="room-foot">
+            <div class="meta"><span><i class="fa-solid fa-wifi"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake"></i>A/C</span></div>
+            <a href="#reservas" class="room-link">Reservar <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Triple -->
+      <article class="room-card reveal d2">
+        <div class="room-media">
+          <span class="tag">Triple</span>
+          <img data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-17-Enero-2020.jpg" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="Habitación triple" loading="lazy" />
+        </div>
+        <div class="room-body">
+          <h3>Habitación Triple</h3>
+          <div class="cap"><i class="fa-solid fa-users"></i> Para 3 personas</div>
+          <p>Para tres personas. Ideal para grupos y familias.</p>
+          <div class="room-foot">
+            <div class="meta"><span><i class="fa-solid fa-wifi"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake"></i>A/C</span></div>
+            <a href="#reservas" class="room-link">Reservar <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Servicios</h2>
+      <hr class="rule" />
+      <p>Todo lo que necesita para una estadía confortable.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER (parallax)
+     ============================================================ -->
+<section class="cta-banner">
+  <div class="cta-bg" id="ctaBg" data-real="https://www.moradasuites.com.ar/wp-content/uploads/2020/04/Foto-Hotel-22-Enero-2020.jpg" style="background-image:url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1700&q=80')"></div>
+  <div class="wrap reveal">
+    <span class="eyebrow on-dark">Estamos para ayudarte</span>
+    <h2>Consultas y reservas — le respondemos a la brevedad.</h2>
+    <a href="#contacto" class="btn-ghost">Contactar <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section class="section gallery-section">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Galería</span>
+      <h2>Conocé el hotel</h2>
+      <hr class="rule" />
+      <p>Espacios pensados para tu descanso.</p>
+    </div>
+    <div class="masonry" id="masonry"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PLATFORMS
+     ============================================================ -->
+<section class="section platforms">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Reservá como prefieras</span>
+      <h2>Reservá como prefieras</h2>
+      <hr class="rule" />
+      <p>Contacto directo o a través de las principales plataformas.</p>
+    </div>
+    <div class="plat-grid">
+      <div class="plat reveal">
+        <div class="pl-mark" style="background:#003580;"><i class="fa-solid fa-b"></i></div>
+        <div class="pl-name">Booking<b>.com</b></div>
+        <div class="pl-tag">Reserva online</div>
+      </div>
+      <div class="plat reveal d1">
+        <div class="pl-mark" style="background:#0099FF;"><i class="fa-solid fa-plane-departure"></i></div>
+        <div class="pl-name">Despegar</div>
+        <div class="pl-tag">Reserva online</div>
+      </div>
+      <div class="plat reveal d2">
+        <div class="pl-mark" style="background:#2DBE60;"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+        <div class="pl-name">Trivago</div>
+        <div class="pl-tag">Comparador</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer" id="contacto">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-about footer-col">
+        <a href="#inicio" class="logo">
+          <img class="logo-mark" src="assets/ms-logo.png" alt="Morada Suites Hotel" />
+          <span class="lockup">
+            <span class="word">Morada Suites</span>
+            <span class="sub">— HOTEL —</span>
+          </span>
+        </a>
+        <p>Confort y ubicación privilegiada en el centro de Campana. 26 habitaciones amplias, luminosas y equipadas para tu descanso.</p>
+      </div>
+
+      <div class="footer-col" id="ubicacion">
+        <h4>Contacto</h4>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-location-dot"></i><span>Juan Bautista Alberdi 876,<br/>Campana, Buenos Aires</span></li>
+          <li><i class="fa-regular fa-envelope"></i><a href="mailto:reservas@moradasuites.com.ar">reservas@moradasuites.com.ar</a></li>
+          <li><i class="fa-brands fa-whatsapp"></i><span>(011) 21698-893 · (011) 21698-648</span></li>
+          <li><i class="fa-solid fa-phone"></i><span>(03489) 447696 / 447783</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ubicación</h4>
+        <p class="ftxt" style="margin-bottom:18px;">A 73 km de la Ciudad de Buenos Aires por autopista. Cerca de la Costanera, la Plaza Eduardo Costa y la Catedral Santa Florentina.</p>
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.1962676935086!2d-58.96346888521096!3d-34.16689934202231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bb7233fb0319c5%3A0xaefc98cb296da22!2sMorada%20Suites!5e0!3m2!1ses-419!2sar!4v1586786693799!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Morada Suites"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Morada Suites Hotel · Campana, Buenos Aires.</span>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="mailto:reservas@moradasuites.com.ar" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Galería ampliada">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+  <img id="lbImg" src="" alt="Imagen ampliada" />
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+/* ============================================================
+   1. NAVBAR — transparent → solid on scroll
+   ============================================================ */
+const nav = document.getElementById('nav');
+const toTop = document.getElementById('toTop');
+function onScroll(){
+  const y = window.scrollY;
+  nav.classList.toggle('solid', y > 60);
+  toTop.classList.toggle('show', y > 700);
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+
+/* mobile menu toggle */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+}));
+
+toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+/* ============================================================
+   2. SERVICES — render from data with inline SVG icons
+   ============================================================ */
+const ICONS = {
+  breakfast:'<path d="M4 19h16M6 8a4 4 0 0 1 8 0v4a4 4 0 0 1-8 0V8Zm8 0h2.5a2.5 2.5 0 0 1 0 5H14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  restaurant:'<path d="M6 3v8m0 0a2 2 0 0 0 2-2V3M6 11v10M9 3v6M18 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4m0 0v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  meal:'<path d="M3 12a9 9 0 0 1 18 0M2 12h20M5 16h14M7 20h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  wifi:'<path d="M2 8.5a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="19" r="1.3" fill="currentColor"/>',
+  tv:'<rect x="3" y="4" width="18" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+  phone:'<path d="M5 4h4l1.5 5-2 1.5a12 12 0 0 0 5 5l1.5-2 5 1.5v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>',
+  alarm:'<path d="M12 3a7 7 0 0 0-7 7c0 5-2 6-2 6h18s-2-1-2-6a7 7 0 0 0-7-7ZM9.5 20a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  medical:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9.5v4M10 11.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  safe:'<rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="13" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M13 12h2M7 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  ac:'<path d="M12 3v18M3 12h18M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  fridge:'<rect x="6" y="3" width="12" height="18" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 10h12M9.5 6v2M9.5 13v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  bath:'<path d="M4 12V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2M3 12h18v2a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-2ZM6 18l-1 2M18 18l1 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  hair:'<path d="M4 5c4 1 9 3 13 6M4 5l1 4M17 11l3 2a2 2 0 0 1-1 3.7L8 17a3 3 0 0 1 0-6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+  parking:'<rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  concierge:'<path d="M12 4a6 6 0 0 1 6 6v3H6v-3a6 6 0 0 1 6-6ZM12 4V2M4 17h16M5 13h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>'
+};
+const SERVICES = [
+  ['breakfast','Desayuno buffet','Para comenzar bien el día.'],
+  ['restaurant','Restaurante','Cocina en el mismo hotel.'],
+  ['meal','Almuerzo y cena','Servicio durante tu estadía.'],
+  ['wifi','Wi-Fi gratuito','Conexión en todo el hotel.'],
+  ['tv','TV LCD','Con Cablevisión.'],
+  ['phone','Teléfono DDN/DDI','Llamadas nacionales e internacionales.'],
+  ['alarm','Alarma monitoreada','Seguridad las 24 horas.'],
+  ['medical','Emergencias médicas','Asistencia disponible.'],
+  ['safe','Cofre de seguridad','Individual en la habitación.'],
+  ['ac','Aire acondicionado','Frío / calor.'],
+  ['fridge','Frigobar','En cada habitación.'],
+  ['bath','Baño privado','En todas las habitaciones.'],
+  ['hair','Secador de cabello','A disposición del huésped.'],
+  ['parking','Estacionamiento','Para tu vehículo.'],
+  ['concierge','Atención personalizada','Pensada en cada detalle.']
+];
+document.getElementById('servicesGrid').innerHTML = SERVICES.map(([k,t,d],i) => `
+  <div class="svc reveal ${i%3===1?'d1':i%3===2?'d2':''}">
+    <span class="svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg></span>
+    <div><div class="t">${t}</div><div class="d">${d}</div></div>
+  </div>`).join('');
+
+/* ============================================================
+   3. GALLERY — build masonry + lightbox
+   ============================================================ */
+/* Placeholder gallery (shown in preview). Each upgrades to the real
+   hotel photo in REAL_GALLERY below if/when that domain is reachable. */
+const GALLERY = [
+  '1566073771259-6a8506099945','1578683010236-d716f9a3f461','1564501049412-61c2a3083791',
+  '1590490360182-c33d57733427','1445019980597-93fa8acb246c','1631049307264-da0ec9d70304',
+  '1611892440504-42a792e24d32','1542314831-068cd1dbfeeb','1551882547-ff40c63fe5fa'
+].map(id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1100&q=80`);
+
+const REAL_GALLERY = [
+  'Foto-Hotel-14-Enero-2020.jpg','Foto-Hotel-19-Enero-2020.jpg','Foto-Hotel-3-Enero-2020.jpg',
+  'Foto-Hotel-15-Enero-2020.jpg','Foto-Hotel-17-Enero-2020.jpg','Foto-Hotel-5-Enero-2020.jpg',
+  'Foto-Hotel-7-Enero-2020.jpg','Foto-Hotel-22-Enero-2020.jpg','Foto-Hotel-8-Enero-2020.jpg'
+].map(f => `https://www.moradasuites.com.ar/wp-content/uploads/2020/04/${f}`);
+
+const masonry = document.getElementById('masonry');
+masonry.innerHTML = GALLERY.map((src,i) => `
+  <figure data-i="${i}" class="reveal ${i%3===1?'d1':i%3===2?'d2':''}">
+    <img src="${src}" alt="Morada Suites — foto ${i+1}" loading="lazy" />
+  </figure>`).join('');
+
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+let lbIndex = 0;
+function openLB(i){ lbIndex = i; lbImg.src = GALLERY[i]; lightbox.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLB(){ lightbox.classList.remove('open'); document.body.style.overflow=''; }
+function stepLB(d){ lbIndex = (lbIndex + d + GALLERY.length) % GALLERY.length; lbImg.src = GALLERY[lbIndex]; }
+masonry.querySelectorAll('figure').forEach(f => f.addEventListener('click', () => openLB(+f.dataset.i)));
+document.getElementById('lbClose').addEventListener('click', closeLB);
+document.getElementById('lbPrev').addEventListener('click', () => stepLB(-1));
+document.getElementById('lbNext').addEventListener('click', () => stepLB(1));
+lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLB(); });
+document.addEventListener('keydown', e => {
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLB();
+  if(e.key === 'ArrowLeft') stepLB(-1);
+  if(e.key === 'ArrowRight') stepLB(1);
+});
+
+/* ============================================================
+   4. REVEAL ON SCROLL — IntersectionObserver
+   ============================================================ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+}, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============================================================
+   4b. IMAGE UPGRADE — prefer the hotel's real photos when reachable.
+   Placeholders render immediately; if moradasuites.com.ar serves the
+   real image (e.g. once deployed on their own server), we swap it in.
+   ============================================================ */
+const heroBg = document.getElementById('heroBg');
+const ctaBg = document.getElementById('ctaBg');
+function upgrade(realUrl, apply){
+  if(!realUrl) return;
+  const probe = new Image();
+  probe.onload = () => apply(realUrl);
+  probe.src = realUrl;
+}
+/* Placeholders render immediately and reliably. Where the hotel's own
+   domain is reachable (a real browser / the live deployment) we swap in
+   the actual hotel photos automatically. */
+// background hero + CTA banner
+[heroBg, ctaBg].forEach(el => upgrade(el.dataset.real, url => { el.style.backgroundImage = `url('${url}')`; }));
+// inline <img> with data-real
+document.querySelectorAll('img[data-real]').forEach(img => upgrade(img.dataset.real, url => { img.src = url; }));
+// gallery (masonry thumbs + lightbox source)
+REAL_GALLERY.forEach((url, i) => upgrade(url, real => {
+  GALLERY[i] = real;
+  const fig = masonry.querySelector(`figure[data-i="${i}"] img`);
+  if(fig) fig.src = real;
+  if(lightbox.classList.contains('open') && lbIndex === i) lbImg.src = real;
+}));
+
+/* ============================================================
+   4c. HERO VIDEO — if the browser can't decode it, fall back to
+   the hero image underneath (the video sits on top of #heroBg's
+   background-image, so we just hide the video on failure).
+   ============================================================ */
+const heroVideo = document.querySelector('.hero-video');
+if(heroVideo){
+  let settled = false;
+  function dropVideo(){ if(settled) return; settled = true; heroVideo.style.display = 'none'; clearInterval(poll); }
+  function keepVideo(){ settled = true; clearInterval(poll); }
+  heroVideo.addEventListener('error', dropVideo);
+  const vsrc = heroVideo.querySelector('source');
+  if(vsrc) vsrc.addEventListener('error', dropVideo);
+
+  // Poll: a working video will show a non-black frame within a few seconds
+  // (we tolerate a black intro); an undecodable one stays black / errors.
+  const cv = document.createElement('canvas'); cv.width = 32; cv.height = 18;
+  const cx = cv.getContext('2d');
+  let blackHits = 0;
+  const poll = setInterval(() => {
+    if(settled) return;
+    if(heroVideo.error){ dropVideo(); return; }
+    if(heroVideo.readyState >= 2){
+      try{
+        cx.drawImage(heroVideo, 0, 0, 32, 18);
+        const d = cx.getImageData(0, 0, 32, 18).data;
+        let sum = 0; for(let i = 0; i < d.length; i += 4) sum += d[i] + d[i+1] + d[i+2];
+        if(sum > 60){ keepVideo(); return; }   // visible content → real video, keep it
+        if(++blackHits >= 7){ dropVideo(); }    // ~5s of black → undecodable, drop
+      }catch(e){ keepVideo(); }                 // tainted/cross-origin → assume fine
+    }
+  }, 700);
+  setTimeout(() => { if(!settled){ /* no frames ever decoded */ if(heroVideo.error || blackHits) dropVideo(); } }, 9000);
+}
+
+/* ============================================================
+   5. PARALLAX — hero + CTA banner
+   ============================================================ */
+const ctaSection = ctaBg.closest('.cta-banner');
+let ticking = false;
+function parallax(){
+  const y = window.scrollY;
+  if(y < window.innerHeight + 200){ heroBg.style.transform = `translateY(${y * 0.28}px)`; }
+  const rect = ctaSection.getBoundingClientRect();
+  if(rect.top < window.innerHeight && rect.bottom > 0){
+    const prog = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    ctaBg.style.transform = `translateY(${(prog - 0.5) * 80}px)`;
+  }
+  ticking = false;
+}
+window.addEventListener('scroll', () => {
+  if(!ticking){ requestAnimationFrame(parallax); ticking = true; }
+}, { passive:true });
+parallax();
+</script>
+
+<!-- Auto-print once fonts + a settle delay are ready -->
+<script>
+window.addEventListener('load', () => {
+  const go = () => setTimeout(() => window.print(), 600);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(go);
+  } else {
+    go();
+  }
+});
+</script>
+</body>
+</html>
