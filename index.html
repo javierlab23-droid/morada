@@ -289,6 +289,8 @@ button{ font-family:inherit; cursor:pointer; }
 @media (max-width:760px){
   .booking{ margin-top:-90px; }
   .bk-grid, .bk-grid.row2{ grid-template-columns:1fr; }
+  .bk-grid > *, .bk-grid.row2 > *{ min-width:0; }
+  .bk-submit{ width:100%; letter-spacing:.07em; padding-left:16px; padding-right:16px; }
 }
 
 /* ============================================================
@@ -408,11 +410,10 @@ button{ font-family:inherit; cursor:pointer; }
 }
 .masonry figure:hover img{ transform:scale(1.07); }
 .masonry figure:hover::after{ opacity:1; }
-/* tablet / mobile: collapse to a simple 2-col mosaic, hero spans full width */
+/* tablet / mobile: even 2-col mosaic (8 photos = 4 full rows, no orphan cell) */
 @media (max-width:760px){
-  .masonry{ grid-template-columns:repeat(2,1fr); grid-auto-rows:clamp(132px,33vw,200px); }
+  .masonry{ grid-template-columns:repeat(2,1fr); grid-auto-rows:clamp(120px,30vw,180px); gap:12px; }
   .masonry figure{ grid-column:auto !important; grid-row:auto !important; }
-  .masonry figure:nth-child(1){ grid-column:1 / 3 !important; }
 }
 
 /* lightbox */
@@ -724,7 +725,7 @@ button{ font-family:inherit; cursor:pointer; }
 <section class="section" id="servicios">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">Servicios</span>
+      <span class="eyebrow">Comodidades</span>
       <h2>Servicios</h2>
       <hr class="rule" />
       <p>Todo lo que necesita para una estadía confortable.</p>
@@ -777,7 +778,7 @@ button{ font-family:inherit; cursor:pointer; }
         <div class="pl-name">Booking<b>.com</b></div>
         <div class="pl-tag">Reserva online</div>
       </a>
-      <a class="plat reveal d1" href="https://www.trivago.com.ar/es-AR/oar/hotel-morada-suites-campana?search=100-2815590" target="_blank" rel="noopener">
+      <a class="plat reveal d1" href="https://www.trivago.com.ar/es-AR/oar/hotel-morada-suites-campana" target="_blank" rel="noopener">
         <div class="pl-mark" style="background:#2DBE60;"><i class="fa-solid fa-magnifying-glass-location"></i></div>
         <div class="pl-name">Trivago</div>
         <div class="pl-tag">Comparador</div>
@@ -807,7 +808,7 @@ button{ font-family:inherit; cursor:pointer; }
         <h4>Contacto</h4>
         <ul class="contact-list">
           <li><i class="fa-solid fa-location-dot"></i><span>Juan Bautista Alberdi 876,<br/>Campana, Buenos Aires</span></li>
-          <li><i class="fa-regular fa-envelope"></i><a href="mailto:reservas@moradasuites.com.ar">reservas@moradasuites.com.ar</a></li>
+          <li><i class="fa-regular fa-envelope"></i><a href="/cdn-cgi/l/email-protection#384a5d4b5d4a4e594b7855574a595c594b4d514c5d4b165b575516594a"><span class="__cf_email__" data-cfemail="532136203621253220133e3c2132373220263a2736207d303c3e7d3221">[email&#160;protected]</span></a></li>
           <li><i class="fa-brands fa-whatsapp"></i><span><a href="https://wa.me/5491121698893" target="_blank" rel="noopener">+54 9 11 2169-8893</a></span></li>
           <li><i class="fa-solid fa-phone"></i><span>(03489) 447696 / 447783</span></li>
         </ul>
@@ -827,7 +828,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="socials">
         <a href="https://www.instagram.com/moradasuiteshotel/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://www.facebook.com/moradas.suiteshotel" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="mailto:reservas@moradasuites.com.ar" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+        <a href="/cdn-cgi/l/email-protection#077562746275716674476a687566636674726e7362742964686a296675" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
       </div>
     </div>
   </div>
@@ -843,7 +844,7 @@ button{ font-family:inherit; cursor:pointer; }
 
 <button class="to-top" id="toTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================================
    1. NAVBAR — transparent → solid on scroll
    ============================================================ */
@@ -941,7 +942,7 @@ const SERVICES = [
   ['restaurant','Restaurante','Cocina en el mismo hotel.'],
   ['meal','Almuerzo y cena','Servicio durante tu estadía.'],
   ['wifi','Wi-Fi gratuito','Conexión en todo el hotel.'],
-  ['tv','TV LCD','Con Cablevisión.'],
+  ['tv','TV','Con servicio de cable.'],
   ['phone','Teléfono DDN/DDI','Llamadas nacionales e internacionales.'],
   ['alarm','Alarma monitoreada','Seguridad las 24 horas.'],
   ['medical','Emergencias médicas','Asistencia disponible.'],
